@@ -312,6 +312,3 @@ curl -s http://localhost:8000/analytics \
 
 ---
 
-## License
-
-MIT License — see [LICENSE](LICENSE) for details.
