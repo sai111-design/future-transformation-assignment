@@ -2,7 +2,6 @@
 
 A full-stack MVP with semantic search over a document corpus and role-based task management.
 
-Built as a take-home assignment for the **Full Stack AI Developer Intern** role at Future Transformation.
 
 ---
 
