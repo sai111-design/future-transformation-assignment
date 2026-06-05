@@ -1,6 +1,11 @@
 import { useState, type FormEvent } from "react";
 import { useAuth } from "../context/AuthContext";
 
+const DEMO_ACCOUNTS = [
+  { label: "Admin", email: "admin@demo.com", password: "AdminPass123!" },
+  { label: "User", email: "user@demo.com", password: "UserPass123!" },
+];
+
 export default function Login() {
   const { login } = useAuth();
   const [email, setEmail] = useState("");
@@ -8,17 +13,27 @@ export default function Login() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  async function handleSubmit(e: FormEvent) {
-    e.preventDefault();
+  async function submit(e: string, p: string) {
     setError("");
     setLoading(true);
     try {
-      await login(email, password);
+      await login(e, p);
     } catch {
       setError("Invalid email or password.");
     } finally {
       setLoading(false);
     }
+  }
+
+  function handleSubmit(e: FormEvent) {
+    e.preventDefault();
+    submit(email, password);
+  }
+
+  async function fillAndLogin(acct: { email: string; password: string }) {
+    setEmail(acct.email);
+    setPassword(acct.password);
+    await submit(acct.email, acct.password);
   }
 
   return (
@@ -62,6 +77,33 @@ export default function Login() {
             {loading ? "Signing in..." : "Sign In"}
           </button>
         </form>
+
+        <div className="mt-6 border-t pt-4">
+          <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">
+            Demo Credentials
+          </p>
+          <div className="space-y-2">
+            {DEMO_ACCOUNTS.map((acct) => (
+              <div
+                key={acct.email}
+                className="flex items-center justify-between rounded border border-gray-200 bg-gray-50 px-3 py-2 text-xs"
+              >
+                <div className="font-mono text-gray-700">
+                  <div>{acct.email}</div>
+                  <div className="text-gray-500">{acct.password}</div>
+                </div>
+                <button
+                  type="button"
+                  disabled={loading}
+                  onClick={() => fillAndLogin(acct)}
+                  className="ml-3 shrink-0 rounded bg-indigo-600 px-2 py-1 text-white text-xs font-medium hover:bg-indigo-700 disabled:opacity-50"
+                >
+                  Use {acct.label}
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );

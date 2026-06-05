@@ -13,6 +13,42 @@ Admin:  admin@demo.com  /  AdminPass123!
 User:   user@demo.com   /  UserPass123!
 ```
 
+The login screen also shows these credentials with one-click **Use Admin** / **Use User** buttons.
+
+---
+
+## Screenshots
+
+### Login — one-click demo sign-in
+The demo credentials are shown on the login screen; the **Use Admin** / **Use User** buttons fill the form and sign in in a single click.
+
+![Login screen with demo credentials](screenshots/01-login.png)
+
+### Tasks — role-aware list with status filtering
+Tasks display status pills and assignee. Admins (and the assigned user) can mark a task complete; the dropdown filters by `pending` / `completed`.
+
+![Tasks list](screenshots/02-tasks.png)
+
+### New Task — admin-only creation and assignment
+Admins create tasks and assign them to a user.
+
+![New task form](screenshots/03-task-new.png)
+
+### Documents — upload and inspect
+Admins upload `.txt` files (an embedding is generated on upload). Clicking a row expands the stored document content.
+
+![Documents list](screenshots/04-documents.png)
+
+### Semantic Search — embeddings + FAISS ranking
+A natural-language query is embedded locally and matched against the FAISS index. Note that *"how many vacation days do I get?"* surfaces the **Leave Policy** doc first despite sharing no keywords with it — semantic, not keyword, matching. Lower score = closer L2 distance.
+
+![Semantic search results](screenshots/05-search.png)
+
+### Analytics — task counts and top queries (admin)
+Aggregate task counts plus the most-searched queries.
+
+![Analytics dashboard](screenshots/06-analytics.png)
+
 ---
 
 ## Tech Stack
